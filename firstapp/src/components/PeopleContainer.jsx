@@ -6,7 +6,7 @@ export default function PeopleContainer() {
     const [filteredPeople, setFilteredPeople] = useState([]);
 
     useEffect(()=>{
-        fetch("https://678a0adfdd587da7ac288c57.mockapi.io/api/person").then(
+        fetch("https://657869f6f08799dc80453ea2.mockapi.io/persondata").then(
             (res) => res.json().then((data)=>{
                 setPeople(data);
                 setFilteredPeople(data);
@@ -16,7 +16,7 @@ export default function PeopleContainer() {
 
     const filterPeople = (filter) =>{
         let filtered = people.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()));
-        setfilteredPeople (filtered);
+        setFilteredPeople (filtered);
     }
 
   return (
@@ -31,7 +31,7 @@ export default function PeopleContainer() {
         
 
 
-        <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 p-8 pt-20'>
+        <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 p-8 pt-32'>
             {filteredPeople.map(person => {
                 return <Card name={person.name} imageUrl={person.avatar} title={person.jobtitle}/>
             })}
