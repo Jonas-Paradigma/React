@@ -1,1 +1,347 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&display=swap');
+
+
+@font-face {
+    font-family: 'Karantina';
+    src: url('../fonts/Agdasima/Agdasima-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: bold;
+}
+
+.karantina-bold {
+    font-family: "Karantina", serif;
+    font-weight: 700;
+    font-style: bold;
+}
+
+body {
+    background-color: #1E1E1E;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.top-bar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.top-bar h1 {
+    cursor: pointer;
+}
+
+.top-bar {
+    width: 96.5%;
+    height: 100px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.top-bar h1 {
+    color: rgb(255, 0, 0);
+    font-family: 'Karantina', cursive;
+    font-weight: 900;
+    margin-left: 1%;
+    font-size: 46px;
+    letter-spacing: 4px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #666;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.search-bar input {
+    background-color: #666;
+    border: none;
+    padding: 5px;
+    color: white;
+    outline: none;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.search-bar .close-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.menu-icons {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon,
+.profile-icon {
+    font-size: 24px;
+    margin-left: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.filter {
+    background-color: #444;
+    padding: 10px;
+    margin: 10px 20px;
+    display: inline-block;
+    margin-left: -85%;
+}
+
+.filter span {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-family: "Karantina", cursive;
+    font-weight: 700;
+    font-style: normal;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.filter span:hover {
+    color: #ff0000;
+    background-color: rgba(255, 0, 0, 0.2);
+    cursor: pointer;
+
+}
+
+/* Burger Menu Styling */
+#burger-menu {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 0 5px 5px 0;
+    display: none;
+    z-index: 10;
+}
+
+#burger-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#burger-menu ul li {
+    margin: 15px 0;
+}
+
+#burger-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#burger-menu ul li a:hover {
+    color: #ff0000;
+    text-decoration: underline;
+}
+
+/* Menü sichtbar machen, wenn das Icon geklickt wird */
+#burger-menu.show {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .top-bar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .top-bar h1 {
+        font-size: 36px;
+        margin: 10px 0;
+    }
+
+    .search-bar input {
+        width: 100px;
+    }
+
+    .filter {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    #burger-menu {
+        width: 100%;
+    }
+}
+
+.gallery-container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.row-wrapper {
+    margin-bottom: 20px;
+}
+
+.gallery-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.gallery-item {
+    width: 15%;
+    margin: 0 1.5% 20px;
+    text-align: center;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.divider {
+    height: 20px;
+}
+
+
+.background {
+    background-color: #373737;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.Film {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movie-details {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 800px;
+    margin-left: 30px;
+}
+
+.movie-cover {
+    position: absolute;
+    top: 90px;
+    left: 179px;
+    background-color: white;
+    width: 300px;
+    height: 390px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.movie-description {
+    max-width: 700px;
+    color: white;
+    font-family: 'Adgasima', Bold;
+    font-size: 16px;
+    padding-left: 300px;
+    text-align: left;
+}
+
+.movie-description h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.movie-info {
+    position: absolute;
+    margin-top: 10px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-align: left;
+    bottom: 10px;
+    left: 185px;
+}
+
+.back-button {
+    position: absolute;
+    top: 39px;
+    left: 71px;
+    margin: 0;
+    z-index: 1000;
+}
+
+.back-link {
+    font-size: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.back-link:hover {
+    background-color: #393b3e;
+    color: white;
+}
+
+.play-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.play-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.play-button:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.favorite-button-container {
+    text-align: right;
+    margin: 20px;
+}
+
+.favorite-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: gold;
+}
+
+.favorite-button i.far {
+    color: lightgray;
+}
+
+.favorite-button i.fas {
+    color: gold;
+}
