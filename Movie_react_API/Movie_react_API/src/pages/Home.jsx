@@ -4,6 +4,8 @@ import Filter from "../components/Filter";
 import BurgerMenu from "../components/BurgerMenu";
 import MovieGallery from "../components/MovieGallery";
 import Pagination from "../components/Pagination";
+import "../index.css"; // CSS importieren
+
 
 const Home = () => {
   return (

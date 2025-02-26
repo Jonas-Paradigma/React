@@ -4,6 +4,7 @@ body {
   font-family: 'Karantina', sans-serif;
 }
 
+/*
 .top-bar {
   display: flex;
   justify-content: space-between;
@@ -11,6 +12,7 @@ body {
   padding: 10px 20px;
   background: #222;
 }
+  */
 
 .logo {
   color: red;
