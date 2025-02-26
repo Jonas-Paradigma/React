@@ -93,30 +93,24 @@ body {
     cursor: pointer;
 }
 
-.filter {
-    background-color: #444;
-    padding: 10px;
-    margin: 10px 20px;
-    display: inline-block;
-    margin-left: -85%;
+.filter-container {
+    display: flex;
+    justify-content: left;
+    margin: 20px 0;
+
 }
 
-.filter span {
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    font-size: 18px;
-    letter-spacing: 2px;
-    font-family: "Karantina", cursive;
-    font-weight: 700;
-    font-style: normal;
-    transition: color 0.3s, background-color 0.3s;
-}
-
-.filter span:hover {
-    color: #ff0000;
-    background-color: rgba(255, 0, 0, 0.2);
+#filter-text {
+    padding: 10px 20px;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 5px;
+    color: white;
     cursor: pointer;
+}
 
+#filter-text:hover {
+    background-color: #cc0000;
 }
 
 /* Burger Menu Styling */
@@ -223,7 +217,7 @@ body {
     height: 20px;
 }
 
-/*
+
 .background {
     background-color: #373737;
     color: white;
@@ -345,4 +339,3 @@ body {
     color: gold;
 }
 
-*/
