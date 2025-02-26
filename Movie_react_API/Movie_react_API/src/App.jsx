@@ -28,6 +28,7 @@ function App() {
     fetchRandomMovies();
   }, []);
 
+  
   useEffect(() => {
     if (searchQuery.length > 2) {
       searchMovies(searchQuery);
@@ -90,6 +91,8 @@ function App() {
     setAllMovies(movies ? JSON.parse(movies) : []);
   };
 
+
+
   const setCookie = (name, value, days) => {
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
@@ -107,6 +110,8 @@ function App() {
     });
     setAllMovies(sortedMovies);
   };
+
+  
 
   return (
     <div className="App">
