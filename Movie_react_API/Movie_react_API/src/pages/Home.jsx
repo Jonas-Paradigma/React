@@ -1,3 +1,5 @@
+// pages/Home.jsx
+
 import React from "react";
 import TopBar from "../components/TopBar";
 import Filter from "../components/Filter";
@@ -6,7 +8,6 @@ import MovieGallery from "../components/MovieGallery";
 import Pagination from "../components/Pagination";
 import "../index.css"; // CSS importieren
 
-
 const Home = () => {
   return (
     <div>
@@ -14,7 +15,8 @@ const Home = () => {
       <Filter />
       <BurgerMenu />
       <main>
-        <MovieGallery />
+        <MovieGallery />{" "}
+        {/* Hier wird die MovieGallery angezeigt, die die API-Daten enthält */}
         <Pagination />
       </main>
     </div>

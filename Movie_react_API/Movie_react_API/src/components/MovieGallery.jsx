@@ -15,3 +15,4 @@ const MovieGallery = () => {
 };
 
 export default MovieGallery;
+

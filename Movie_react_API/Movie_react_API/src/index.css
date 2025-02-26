@@ -3,7 +3,7 @@
 
 @font-face {
     font-family: 'Karantina';
-    src: url('../fonts/Agdasima/Agdasima-Bold.ttf') format('truetype');
+    src: url('./fonts/Agdasima/Agdasima-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: bold;
 }
@@ -35,10 +35,9 @@ body {
 }
 
 .top-bar {
-    width: 100%;
-    height: 100px;
+    width: 1250px;
+    height: 90px;
     background-color: #333;
-    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
