@@ -82,7 +82,7 @@ body {
 
 .menu-icons {
     display: flex;
-    align-items: center;
+    align-items: right;
 }
 
 .menu-icon,
@@ -96,21 +96,26 @@ body {
 .filter-container {
     display: flex;
     justify-content: left;
-    margin: 20px 0;
+    margin: 20px 40px;
 
 }
 
 #filter-text {
-    padding: 10px 20px;
-    background-color: #ff0000;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: #333;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-family: "Karantina", cursive;
+    font-weight: 700;
+    font-style: normal;
+    transition: color 0.3s, background-color 0.3s;
 }
 
 #filter-text:hover {
-    background-color: #cc0000;
+    color: #ff0000;
+    background-color: rgba(255, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 /* Burger Menu Styling */
@@ -176,40 +181,6 @@ body {
     #burger-menu {
         width: 100%;
     }
-}
-
-.gallery-container {
-    margin: 20px auto;
-    width: 90%;
-    max-width: 1200px;
-}
-
-.row-wrapper {
-    margin-bottom: 20px;
-}
-
-.gallery-row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.gallery-item {
-    width: 15%;
-    margin: 0 1.5% 20px;
-    text-align: center;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.gallery-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 

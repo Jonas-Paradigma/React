@@ -1,0 +1,36 @@
+.gallery-container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+    display: grid;
+    /* Verwende Grid für das Layout */
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 Spalten */
+    gap: 10px;
+    /* Reduziere den Abstand zwischen den Elementen */
+}
+
+.movie-card {
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-image {
+    width: 100%;
+    height: 250px;
+    /* Einheitliche Höhe */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Filmtitel */
+.movie-card p {
+    color: white;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 14px;
+}

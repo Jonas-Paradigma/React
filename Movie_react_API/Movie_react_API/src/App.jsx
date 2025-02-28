@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./App.css"; // Styles für die App
+import "./App.css"; // Allgemeine Stile für die App
+import "./Gallery.css"; // Stile für die Galerie
+
 const apiKey = "59033ecf"; // Dein OMDB API-Schlüssel
 const baseURL = "https://www.omdbapi.com/";
 
@@ -28,7 +30,6 @@ function App() {
     fetchRandomMovies();
   }, []);
 
-  
   useEffect(() => {
     if (searchQuery.length > 2) {
       searchMovies(searchQuery);
@@ -46,16 +47,8 @@ function App() {
       );
       const data = await response.json();
       if (data.Response === "True" && data.Search) {
-        setAllMovies((prevMovies) => [
-          ...prevMovies,
-          ...data.Search.filter(
-            (movie) =>
-              !prevMovies.some(
-                (existingMovie) => existingMovie.imdbID === movie.imdbID
-              )
-          ),
-        ]);
-        saveMoviesToSession([...allMovies, ...data.Search]);
+        setAllMovies(data.Search); // 🔥 Ersetzt jetzt die aktuellen Filme komplett!
+        saveMoviesToSession(data.Search);
       } else {
         console.error("No movies found.");
       }
@@ -91,8 +84,6 @@ function App() {
     setAllMovies(movies ? JSON.parse(movies) : []);
   };
 
-
-
   const setCookie = (name, value, days) => {
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
@@ -111,12 +102,15 @@ function App() {
     setAllMovies(sortedMovies);
   };
 
-  
-
   return (
     <div className="App">
       <header className="top-bar">
-        <h1 className="logo">pnagelFLIX</h1>
+        {/* 🔥 Logo, das neue Filme lädt */}
+        <h1 className="logo" onClick={fetchRandomMovies}>
+          pnagelFLIX
+        </h1>
+
+        {/* 🔍 Zentrierte Suchleiste */}
         <div className="search-bar">
           <input
             type="text"
@@ -137,35 +131,20 @@ function App() {
         </button>
       </div>
 
+      {/* Film-Galerie */}
       <div className="gallery-container">
-        {Array.from(
-          { length: Math.ceil(allMovies.length / 5) },
-          (_, rowIndex) => (
-            <div key={rowIndex} className="row-wrapper">
-              <div className="gallery-row">
-                {allMovies
-                  .slice(rowIndex * 5, (rowIndex + 1) * 5)
-                  .map((movie) => (
-                    <div key={movie.imdbID} className="movie-card">
-                      <img
-                        className="movie-image"
-                        src={
-                          movie.Poster !== "N/A"
-                            ? movie.Poster
-                            : "placeholder.jpg"
-                        }
-                        alt={movie.Title}
-                        onClick={() =>
-                          (window.location.href = `moviename.html?imdbID=${movie.imdbID}`)
-                        }
-                      />
-                      <p>{movie.Title}</p>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          )
-        )}
+        {allMovies.map((movie) => (
+          <div key={movie.imdbID} className="movie-card">
+            <img
+              className="movie-image"
+              src={movie.Poster !== "N/A" ? movie.Poster : "placeholder.jpg"}
+              alt={movie.Title}
+              onClick={() =>
+                (window.location.href = `moviename.html?imdbID=${movie.imdbID}`)
+              }
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
