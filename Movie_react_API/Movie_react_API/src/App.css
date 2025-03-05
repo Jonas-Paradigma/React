@@ -6,26 +6,52 @@ body {
   padding: 0;
 }
 
+/* Topbar */
+.top-bar {
+width: 96.5%;
+  height: 100px;
+  background-color: #333;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
 /* Logo */
 .logo {
-  color: red;
-  font-size: 24px;
+color: rgb(255, 0, 0);
+  font-family: 'Karantina', cursive;
+  font-weight: 900;
+  margin-left: 1%;
+  font-size: 46px;
+  letter-spacing: 4px;
   cursor: pointer;
 }
 
 /* Suchleiste */
 .search-bar {
   display: flex;
-  align-items: center;
+  margin-right: 500px;
+  background: #444;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .search-bar input {
-  background: #444;
-  color: white;
+  background: transparent;
   border: none;
-  padding: 8px 10px;
-  border-radius: 5px;
-  font-size: 14px;
+  color: white;
+  padding: 5px;
+  outline: none;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 /* Filter-Container */
@@ -59,11 +85,8 @@ body {
   width: 90%;
   max-width: 1200px;
   display: grid;
-  /* Verwende Grid für das Layout */
   grid-template-columns: repeat(5, 1fr);
-  /* 5 Spalten */
   gap: 10px;
-  /* Reduziere den Abstand zwischen den Elementen */
 }
 
 /* Einzelne Filmkarte */
@@ -80,7 +103,6 @@ body {
 .movie-image {
   width: 100%;
   height: 250px;
-  /* Einheitliche Höhe */
   object-fit: cover;
   border-radius: 10px;
 }

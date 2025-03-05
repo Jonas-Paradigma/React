@@ -1,11 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
-import "./index.css"; // Globale Styles importieren
+import MovieDetails from "./components/MovieDetails";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/movie/:imdbID" element={<MovieDetails />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );

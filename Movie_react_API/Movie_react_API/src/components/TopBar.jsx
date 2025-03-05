@@ -5,12 +5,12 @@ import "../index.css"; // CSS importieren
 const TopBar = ({ reloadMovies }) => {
   return (
     <div className="top-bar">
-      {/* 🔥 Logo mit Film-Reload-Funktion */}
+      {/* Logo mit Film-Reload-Funktion */}
       <h1 onClick={reloadMovies} style={{ cursor: "pointer" }}>
         pnagelFLIX
       </h1>
 
-      {/* 🔍 Zentrierte Suchleiste */}
+      {/*Search Bar*/}
       <div className="search-container">
         <div className="search-bar">
           <input type="text" placeholder="Search..." />

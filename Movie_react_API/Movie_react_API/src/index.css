@@ -55,10 +55,10 @@ body {
 
 .search-bar {
     display: flex;
-    align-items: center;
+    margin-right: 500px;
     background-color: #666;
     border-radius: 20px;
-    padding: 5px;
+    padding: 9px;
 }
 
 .search-bar input {
@@ -67,7 +67,7 @@ body {
     padding: 5px;
     color: white;
     outline: none;
-    width: 150px;
+    width: 200px;
     border-radius: 5px;
 }
 
@@ -188,63 +188,6 @@ body {
     height: 20px;
 }
 
-
-.background {
-    background-color: #373737;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-.Film {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.movie-details {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    max-width: 800px;
-    margin-left: 30px;
-}
-
-.movie-cover {
-    position: absolute;
-    top: 90px;
-    left: 179px;
-    background-color: white;
-    width: 300px;
-    height: 390px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-.movie-description {
-    max-width: 700px;
-    color: white;
-    font-family: 'Adgasima', Bold;
-    font-size: 16px;
-    padding-left: 300px;
-    text-align: left;
-}
-
-.movie-description h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.movie-info {
-    position: absolute;
-    margin-top: 10px;
-    color: white;
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    text-align: left;
-    bottom: 10px;
-    left: 185px;
-}
 
 .back-button {
     position: absolute;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.css"; // Allgemeine Stile für die App
 import "./Gallery.css"; // Stile für die Galerie
 
@@ -25,6 +26,8 @@ function App() {
   );
   const [searchQuery, setSearchQuery] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     loadMoviesFromSession();
     fetchRandomMovies();
@@ -47,7 +50,7 @@ function App() {
       );
       const data = await response.json();
       if (data.Response === "True" && data.Search) {
-        setAllMovies(data.Search); // 🔥 Ersetzt jetzt die aktuellen Filme komplett!
+        setAllMovies(data.Search);
         saveMoviesToSession(data.Search);
       } else {
         console.error("No movies found.");
@@ -104,13 +107,12 @@ function App() {
 
   return (
     <div className="App">
+      {/* 🔥 Korrekte Top-Bar (wie vorher) */}
       <header className="top-bar">
-        {/* 🔥 Logo, das neue Filme lädt */}
         <h1 className="logo" onClick={fetchRandomMovies}>
           pnagelFLIX
         </h1>
 
-        {/* 🔍 Zentrierte Suchleiste */}
         <div className="search-bar">
           <input
             type="text"
@@ -119,7 +121,7 @@ function App() {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button className="close-btn" onClick={() => setSearchQuery("")}>
-            Clear
+            ✖
           </button>
         </div>
       </header>
@@ -131,7 +133,7 @@ function App() {
         </button>
       </div>
 
-      {/* Film-Galerie */}
+      {/* Film-Galerie mit Navigation zur Detailseite */}
       <div className="gallery-container">
         {allMovies.map((movie) => (
           <div key={movie.imdbID} className="movie-card">
@@ -139,9 +141,7 @@ function App() {
               className="movie-image"
               src={movie.Poster !== "N/A" ? movie.Poster : "placeholder.jpg"}
               alt={movie.Title}
-              onClick={() =>
-                (window.location.href = `moviename.html?imdbID=${movie.imdbID}`)
-              }
+              onClick={() => navigate(`/movie/${movie.imdbID}`)}
             />
           </div>
         ))}

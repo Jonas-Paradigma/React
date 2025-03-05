@@ -17,7 +17,6 @@ const Home = () => {
           <div className="filter">
             <span
               onClick={() => {
-                /* Filter-Logik hier */
               }}
             >
               Filter: A-Z
