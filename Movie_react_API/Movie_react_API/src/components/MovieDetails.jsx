@@ -1,46 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import BackButton from "./BackButton";
+import PlayButton from "./PlayButton";
 import "./MovieDetails.css";
 
-const apiKey = "59033ecf"; // Dein OMDb API-Schlüssel
+const apiKey = "59033ecf";
 
 const MovieDetails = () => {
   const { imdbID } = useParams();
   const [movie, setMovie] = useState(null);
 
-  // Funktion, um den Text in kleinere Teile zu zerlegen (max. 500 Zeichen)
-  const splitText = (text, maxLength = 500) => {
-    const parts = [];
-    for (let i = 0; i < text.length; i += maxLength) {
-      parts.push(text.substring(i, i + maxLength));
-    }
-    return parts;
-  };
-
-  // Funktion zum Übersetzen des Textes mit MyMemory API
-  const translateText = async (text) => {
-    const textParts = splitText(text);
-    const translatedParts = [];
-
-    for (const part of textParts) {
-      try {
-        const response = await fetch(
-          `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
-            part
-          )}&langpair=en|de`
-        );
-        const data = await response.json();
-        translatedParts.push(data.responseData.translatedText);
-      } catch (error) {
-        console.error("Fehler bei der Übersetzung:", error);
-        translatedParts.push(part); // Falls ein Fehler auftritt, füge das Original hinzu
-      }
-    }
-
-    return translatedParts.join(" "); // Setze die übersetzten Teile wieder zusammen
-  };
-
   useEffect(() => {
+    document.body.style.overflow = "hidden"; // Verhindert das Scrollen auf der Seite
+
     const fetchMovieDetails = async () => {
       try {
         const response = await fetch(
@@ -49,11 +21,7 @@ const MovieDetails = () => {
         const data = await response.json();
 
         if (data.Response === "True") {
-          const translatedPlot = await translateText(data.Plot);
-
-          setMovie({ ...data, Plot: translatedPlot });
-        } else {
-          console.error("Fehler: Film nicht gefunden");
+          setMovie(data);
         }
       } catch (error) {
         console.error("Fehler beim Laden der Filmdaten:", error);
@@ -61,36 +29,43 @@ const MovieDetails = () => {
     };
 
     fetchMovieDetails();
+
+    return () => {
+      document.body.style.overflow = "auto"; // Scrollen nach dem Verlassen der Seite wieder zulassen
+    };
   }, [imdbID]);
 
   if (!movie) {
     return <p>Lade Film-Details...</p>;
   }
 
-return (
-  <div className="film-details">
-    <h2>{movie.Title}</h2>
-    <div className="details-container">
-      <div className="movie-poster-container">
-        <img className="movie-poster" src={movie.Poster} alt={movie.Title} />
-        <p className="movie-meta">
-          <strong className="highlight">Jahr:</strong> {movie.Year} |
-          <strong className="highlight"> Genre:</strong> {movie.Genre}
-        </p>
-      </div>
-      <div className="movie-info">
-        <p>
-          <strong>Handlung:</strong> {movie.Plot}
-        </p>
-        <p>
-          <strong>IMDB Bewertung:</strong> {movie.imdbRating}
-        </p>
+  return (
+    <div className="film-details">
+      <BackButton />
+      <h2>{movie.Title}</h2>
+      <div className="details-container">
+        <div className="movie-poster-container">
+          <img className="movie-poster" src={movie.Poster} alt={movie.Title} />
+          <p className="movie-meta">
+            <strong className="highlight">Jahr:</strong> {movie.Year} |
+            <strong className="highlight"> Genre:</strong> {movie.Genre}
+          </p>
+        </div>
+        <div className="movie-info">
+          <p>
+            <strong>Handlung:</strong> {movie.Plot}
+          </p>
+          <p>
+            <strong>🕒 Laufzeit:</strong> {movie.Runtime}
+          </p>
+          <p>
+            <strong>⭐ IMDB Bewertung:</strong> {movie.imdbRating}
+          </p>
+          <PlayButton /> {/* Play-Button direkt unter der IMDB-Bewertung */}
+        </div>
       </div>
     </div>
-  </div>
-);
-
-
+  );
 };
 
 export default MovieDetails;

@@ -1,14 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import "./MovieDetails.css";
 
 const BackButton = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(-1);
+  };
+
   return (
-    <div className="back-button">
-      <Link to="/" className="back-link">
-        <FaArrowLeft />
-      </Link>
-    </div>
+    <button className="back-button" onClick={handleClick}>
+      🡸
+    </button>
   );
 };
 
