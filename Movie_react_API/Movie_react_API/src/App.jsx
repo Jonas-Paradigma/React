@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./App.css"; // Allgemeine Stile für die App
-import "./Gallery.css"; // Stile für die Galerie
+import "./App.css";
+import "./Gallery.css";
 
-const apiKey = "59033ecf"; // Dein OMDB API-Schlüssel
+const apiKey = "59033ecf";
 const baseURL = "https://www.omdbapi.com/";
 
-const randomSearchTerms = [
+const themes = [
   "day",
   "love",
   "sky",
@@ -18,6 +18,7 @@ const randomSearchTerms = [
   "fire",
   "city",
 ];
+const moviesPerPage = 30;
 
 function App() {
   const [allMovies, setAllMovies] = useState([]);
@@ -25,94 +26,79 @@ function App() {
     localStorage.getItem("sortOrder") || "A-Z"
   );
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
+  const [errorMessage, setErrorMessage] = useState(""); // Neue Fehler-Variable
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    loadMoviesFromSession();
-    fetchRandomMovies();
-  }, []);
+    fetchMovies();
+  }, [currentPage, searchQuery]);
 
-  useEffect(() => {
-    if (searchQuery.length > 2) {
-      searchMovies(searchQuery);
-    } else {
-      loadMoviesFromSession();
+  const fetchMovies = async () => {
+    if (!navigator.onLine) {
+      setErrorMessage("⚠ Kein Internet. Bitte verbinden.");
+      return;
     }
-  }, [searchQuery]);
 
-  const fetchRandomMovies = async () => {
-    const randomTerm =
-      randomSearchTerms[Math.floor(Math.random() * randomSearchTerms.length)];
+    setLoading(true);
+    setErrorMessage(""); // Fehler zurücksetzen
+    let allFetchedMovies = [];
+    let totalMovies = 0;
+
     try {
-      const response = await fetch(
-        `${baseURL}?s=${randomTerm}&r=json&apikey=${apiKey}`
-      );
-      const data = await response.json();
-      if (data.Response === "True" && data.Search) {
-        setAllMovies(data.Search);
-        saveMoviesToSession(data.Search);
+      if (searchQuery) {
+        const response = await fetch(
+          `${baseURL}?s=${searchQuery}&page=${currentPage}&r=json&apikey=${apiKey}`
+        );
+        const data = await response.json();
+        if (data.Response === "True") {
+          allFetchedMovies = data.Search;
+          totalMovies = Number(data.totalResults);
+        } else {
+          setErrorMessage("❌ Keine Filme gefunden.");
+        }
       } else {
-        console.error("No movies found.");
+        for (let theme of themes) {
+          const response = await fetch(
+            `${baseURL}?s=${theme}&page=${currentPage}&r=json&apikey=${apiKey}`
+          );
+          const data = await response.json();
+          if (data.Response === "True") {
+            allFetchedMovies = [...allFetchedMovies, ...data.Search];
+            totalMovies += Number(data.totalResults);
+          }
+        }
       }
+      setAllMovies(allFetchedMovies);
+      setTotalResults(totalMovies);
     } catch (error) {
-      console.error("Error fetching movies:", error);
+      setErrorMessage("❌ Fehler beim Laden der Filme.");
     }
-  };
 
-  const searchMovies = async (query) => {
-    try {
-      const response = await fetch(
-        `${baseURL}?s=${query}&r=json&apikey=${apiKey}`
-      );
-      const data = await response.json();
-      if (data.Response === "True") {
-        setAllMovies(data.Search);
-        setCookie("lastSearch", query, 7);
-        saveMoviesToSession(data.Search);
-      } else {
-        setAllMovies([]);
-      }
-    } catch (error) {
-      console.error("Error searching movies:", error);
-    }
-  };
-
-  const saveMoviesToSession = (movies) => {
-    sessionStorage.setItem("allMovies", JSON.stringify(movies));
-  };
-
-  const loadMoviesFromSession = () => {
-    const movies = sessionStorage.getItem("allMovies");
-    setAllMovies(movies ? JSON.parse(movies) : []);
-  };
-
-  const setCookie = (name, value, days) => {
-    const date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+    setLoading(false);
   };
 
   const handleSort = () => {
     const newSortOrder = currentSortOrder === "A-Z" ? "Z-A" : "A-Z";
     setCurrentSortOrder(newSortOrder);
     localStorage.setItem("sortOrder", newSortOrder);
-    const sortedMovies = [...allMovies].sort((a, b) => {
-      return newSortOrder === "A-Z"
+    const sortedMovies = [...allMovies].sort((a, b) =>
+      newSortOrder === "A-Z"
         ? a.Title.localeCompare(b.Title)
-        : b.Title.localeCompare(a.Title);
-    });
+        : b.Title.localeCompare(a.Title)
+    );
     setAllMovies(sortedMovies);
   };
 
   return (
     <div className="App">
-      {/* 🔥 Korrekte Top-Bar (wie vorher) */}
       <header className="top-bar">
-        <h1 className="logo" onClick={fetchRandomMovies}>
+        <h1 className="logo" onClick={fetchMovies}>
           pnagelFLIX
         </h1>
-
         <div className="search-bar">
           <input
             type="text"
@@ -126,25 +112,51 @@ function App() {
         </div>
       </header>
 
-      {/* Sortierung unter dem Header */}
+      {/* Fehleranzeige */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+      {/* Filter unter der Suchleiste */}
       <div className="filter-container">
         <button id="filter-text" onClick={handleSort}>
           Filter: {currentSortOrder}
         </button>
       </div>
 
-      {/* Film-Galerie mit Navigation zur Detailseite */}
-      <div className="gallery-container">
-        {allMovies.map((movie) => (
-          <div key={movie.imdbID} className="movie-card">
-            <img
-              className="movie-image"
-              src={movie.Poster !== "N/A" ? movie.Poster : "placeholder.jpg"}
-              alt={movie.Title}
-              onClick={() => navigate(`/movie/${movie.imdbID}`)}
-            />
-          </div>
-        ))}
+      {/* Ladeanzeige */}
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="gallery-container">
+          {allMovies.map((movie) => (
+            <div key={movie.imdbID} className="movie-card">
+              <img
+                className="movie-image"
+                src={movie.Poster !== "N/A" ? movie.Poster : "placeholder.jpg"}
+                alt={movie.Title}
+                onClick={() => navigate(`/movie/${movie.imdbID}`)}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Pagination */}
+      <div className="pagination">
+        <button
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {Math.ceil(totalResults / moviesPerPage)}
+        </span>
+        <button
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={currentPage >= Math.ceil(totalResults / moviesPerPage)}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

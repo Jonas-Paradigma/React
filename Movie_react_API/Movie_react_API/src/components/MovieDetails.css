@@ -1,9 +1,12 @@
+/* MovieDetails.css */
+
+/* Verhindert das Scrollen auf der Seite */
 body.moviedetails-page {
     overflow: hidden;
-    /* Verhindert das Scrollen */
     height: 100vh;
 }
 
+/* Hauptbereich für die Film-Details */
 .film-details {
     display: flex;
     flex-direction: column;
@@ -16,6 +19,7 @@ body.moviedetails-page {
     position: relative;
 }
 
+/* Titel des Films */
 .film-details h2 {
     font-size: 45px;
     margin-bottom: 20px;
@@ -25,6 +29,7 @@ body.moviedetails-page {
     width: 100%;
 }
 
+/* Container für die Film-Details */
 .details-container {
     display: flex;
     align-items: flex-start;
@@ -34,50 +39,55 @@ body.moviedetails-page {
     gap: 40px;
 }
 
+/* Container für das Film-Poster */
 .movie-poster-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Film-Poster */
 .movie-poster {
     width: 280px;
     border-radius: 10px;
 }
 
+/* Meta-Daten unter dem Poster (Jahr, Genre) */
 .movie-meta {
     margin-top: 10px;
     font-size: 25px;
     text-align: center;
 }
 
+/* Informationen zum Film */
 .movie-info {
     text-align: left;
     max-width: 600px;
     font-size: 25px;
 }
 
+/* Styling für die einzelnen Info-Absätze */
 .movie-info p {
     margin: 10px 0;
 }
 
+/* Hervorheben von wichtigen Informationen (z.B. Jahr, Genre) */
 .movie-info strong {
     color: #ffcc00;
 }
 
+/* Ein spezifisches Highlight-Design für hervorgehobene Texte */
 .highlight {
     color: #ffcc00;
 }
 
+/* Weitere Styling für Text in der Movie-Info */
 .movie-info p {
     font-size: 18px;
     margin: 5px 0;
 }
 
-.movie-info strong {
-    color: #ffcc00;
-}
-
+/* Button für Zurück-Navigation */
 .back-button {
     background-color: #444444;
     color: white;
@@ -91,7 +101,6 @@ body.moviedetails-page {
     top: 20px;
     left: 20px;
     z-index: 10;
-    /* Sicherstellen, dass der Back-Button oben bleibt */
 }
 
 .back-button:hover {
@@ -99,6 +108,7 @@ body.moviedetails-page {
     transform: scale(1.05);
 }
 
+/* Play-Button Styling */
 .play-button-container {
     display: flex;
     justify-content: center;
@@ -121,4 +131,43 @@ body.moviedetails-page {
 .play-button:hover {
     background-color: #ffaa00;
     transform: scale(1.05);
+}
+
+/* Favoriten-Button Container */
+.favorite-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.favorite-button {
+    background-color: #444444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.favorite-button:hover {
+    background-color: #ffaa00;
+    transform: scale(1.05);
+}
+
+.favorite-icon {
+    font-size: 24px;
+    color: #ffcc00;
+}
+
+.favorite-icon.empty {
+    color: #777;
+}
+
+.favorite-icon.filled {
+    color: #ffcc00;
 }

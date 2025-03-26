@@ -1,3 +1,4 @@
+/* Grundlegende Stile für den Body */
 body {
   background-color: #1a1a1a;
   color: white;
@@ -7,20 +8,32 @@ body {
 }
 
 /* Topbar */
+/* Fixierte Topbar */
+
 .top-bar {
-width: 96.5%;
-  height: 100px;
-  background-color: #333;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+  }
+
+
+/* Inhalt unter der fixierten Topbar */
+.body-content {
+  margin-top: 100px;
+
 }
 
-/* Logo */
+/* Logo in der TopBar */
 .logo {
-color: rgb(255, 0, 0);
+  color: rgb(255, 0, 0);
   font-family: 'Karantina', cursive;
   font-weight: 900;
   margin-left: 1%;
@@ -57,8 +70,12 @@ color: rgb(255, 0, 0);
 /* Filter-Container */
 .filter-container {
   display: flex;
-  justify-content: left;
-  margin: 20px 40px;
+  justify-content: flex-start;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  margin-bottom: 10px;
+  margin-top: 100px;
 }
 
 #filter-text {
@@ -69,25 +86,29 @@ color: rgb(255, 0, 0);
   letter-spacing: 2px;
   font-family: "Karantina", cursive;
   font-weight: 700;
-  font-style: normal;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
   transition: color 0.3s, background-color 0.3s;
 }
 
 #filter-text:hover {
   color: #ff0000;
   background-color: rgba(255, 0, 0, 0.2);
-  cursor: pointer;
 }
 
 /* Grid-Layout für die Filme */
 .gallery-container {
-  margin: 20px auto;
+  margin: 0 auto;
   width: 90%;
   max-width: 1200px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+  margin-top: 10px;
 }
+
 
 /* Einzelne Filmkarte */
 .movie-card {
@@ -121,3 +142,107 @@ color: rgb(255, 0, 0);
   margin: 20px;
 }
 
+/* Favoriten-Button unter dem Play-Button */
+.favorite-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.favorite-button {
+  background-color: #ff0000;
+  color: white;
+  padding: 12px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s;
+  font-weight: bold;
+  text-align: center;
+}
+
+.favorite-button:hover {
+  background-color: #cc0000;
+}
+
+.favorite-icon {
+  font-size: 24px;
+  transition: color 0.3s;
+}
+
+.favorite-icon.filled {
+  color: gold;
+}
+
+.favorite-icon.empty {
+  color: #ddd;
+}
+
+/* Burger-Menü in der TopBar */
+.burger-menu-container {
+  position: relative;
+}
+
+.burger-menu-button {
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.burger-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #444;
+  border-radius: 5px;
+  display: none;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.burger-menu.open {
+  display: block;
+}
+
+.burger-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.burger-menu ul li {
+  margin: 10px 0;
+}
+
+.burger-menu ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 5px;
+}
+
+.burger-menu ul li a:hover {
+  background-color: #ffcc00;
+  border-radius: 3px;
+}
+
+.profile-icon {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+  margin: 10px 0;
+  margin-top: 200px;
+}

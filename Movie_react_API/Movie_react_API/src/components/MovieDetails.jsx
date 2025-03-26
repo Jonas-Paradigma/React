@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BackButton from "./BackButton";
 import PlayButton from "./PlayButton";
+import { FaStar } from "react-icons/fa"; // Stern-Icon von react-icons
 import "./MovieDetails.css";
 
+// API Key
 const apiKey = "59033ecf";
 
 const MovieDetails = () => {
   const { imdbID } = useParams();
   const [movie, setMovie] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false); // Zustand für "Favorit"
 
   useEffect(() => {
     document.body.style.overflow = "hidden"; // Verhindert das Scrollen auf der Seite
@@ -34,6 +37,11 @@ const MovieDetails = () => {
       document.body.style.overflow = "auto"; // Scrollen nach dem Verlassen der Seite wieder zulassen
     };
   }, [imdbID]);
+
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite); 
+    
+  };
 
   if (!movie) {
     return <p>Lade Film-Details...</p>;
@@ -63,6 +71,16 @@ const MovieDetails = () => {
           </p>
           <PlayButton /> {/* Play-Button direkt unter der IMDB-Bewertung */}
         </div>
+      </div>
+
+      {/* Favoriten-Button */}
+      <div className="favorite-container">
+        <button className="favorite-button" onClick={handleFavoriteClick}>
+          <FaStar
+            className={`favorite-icon ${isFavorite ? "filled" : "empty"}`}
+          />
+          {isFavorite ? "Vom Favoriten entfernen" : "Als Favorit hinzufügen"}
+        </button>
       </div>
     </div>
   );

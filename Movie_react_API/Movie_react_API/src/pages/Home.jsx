@@ -1,10 +1,10 @@
 import React from "react";
 import TopBar from "../components/TopBar";
-import Filter from "../components/Filter"; // Überprüfe, ob dies korrekt ist
+import Filter from "../components/Filter";
 import BurgerMenu from "../components/BurgerMenu";
 import MovieGallery from "../components/MovieGallery";
 import Pagination from "../components/Pagination";
-import "../index.css"; // CSS importieren
+import "../index.css"; // CSS import
 
 const Home = () => {
   return (

@@ -1,30 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "../index.css"; // CSS importieren
+import "./Topbar.css"; // CSS Datei importieren
 
-const TopBar = ({ reloadMovies }) => {
+const Topbar = () => {
   return (
     <div className="top-bar">
-      {/* Logo mit Film-Reload-Funktion */}
-      <h1 onClick={reloadMovies} style={{ cursor: "pointer" }}>
-        pnagelFLIX
-      </h1>
+      {/* Logo */}
+      <div className="logo">Logo</div>
 
-      {/*Search Bar*/}
-      <div className="search-container">
-        <div className="search-bar">
-          <input type="text" placeholder="Search..." />
-          <button className="close-btn">✖</button>
-        </div>
-      </div>
-
-      {/* Menü Icons */}
-      <div className="menu-icons">
-        <span className="menu-icon">☰</span>
-        <span className="profile-icon">👤</span>
+      {/* Filter-Button */}
+      <div className="filter-button-container">
+        <button className="filter-button">Filter</button>
       </div>
     </div>
   );
 };
 
-export default TopBar;
+export default Topbar;
